@@ -54,7 +54,7 @@ The `correlationId` follows one workflow across the API transaction, outbox publ
 
 Blockchain gateways, ledger workers, audit consumers, and the WebSocket gateway consume NATS events independently. TLS, service credentials, and subject-level permissions limit what each producer and consumer may publish or read. Event payloads carry resource identifiers but never private key material or signing shares. The public WebSocket layer does not expose internal NATS subjects directly: it authenticates the external client with its BroSettlement API key, binds the connection to one organization, filters the allowed event families, and translates approved internal messages into a stable client lifecycle contract. The target gateway model uses filtered JetStream consumers with explicit acknowledgments and redelivery backoff, while PostgreSQL read APIs remain available even if live WebSocket delivery is degraded.
 
-<img class="img-responsive center-block" src="/img/blog/brosettlement-nats-architecture-1.png" alt="Sanitized Brosettlement Staging Architechture using NATS JetStream">
+<img class="img-responsive center-block" src="/img/blog/brosettlement-nats-architecture-1.png" alt="Sanitized BroSettlement staging architecture using NATS JetStream">
 
 ## What staging tests taught us
 
@@ -65,10 +65,3 @@ The resilience tests also helped us define the next production-hardening step. W
 ## About the author
 
 Vadym Rozov is the founder of BroLabel, a fintech company building digital-asset infrastructure products. BroSettlement provides API-first MPC wallets, a client-controlled Co-Signer, an immutable operating ledger, blockchain broadcast, and real-time lifecycle events for teams embedding stablecoin and crypto wallet operations.
-
-## Editorial notes
-
-- All numerical results above come from BroSettlement's staging environment; the article does not claim production-adopter status.
-- The architecture diagram is intentionally sanitized and contains no credentials, internal hostnames, or private topology.
-- Suggested canonical link for BroSettlement: `https://www.brolabel.io/en/brosettlement`.
-- The accompanying editable vector is `brosettlement-nats-architecture.svg`; the publication image is `brosettlement-nats-architecture.png`.
